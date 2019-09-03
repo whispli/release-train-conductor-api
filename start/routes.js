@@ -18,4 +18,5 @@ const Route = use('Route')
 
 Route.on('/').render('welcome')
 
-Route.resource('pull-requests', 'PullRequestController')
+// API V1 Routes
+require('./routes-api-v1')

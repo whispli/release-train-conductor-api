@@ -18,6 +18,7 @@ class PullRequestController {
    * @param {View} ctx.view
    */
   async index ({ request, response, view }) {
+    return ['TODO: Implement.'];
   }
 
   /**
