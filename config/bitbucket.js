@@ -22,5 +22,6 @@ module.exports = {
       username: Env.get('BITBUCKET_USERNAME', ''),
       password: Env.get('BITBUCKET_PASSWORD', '')
     }
-  }
+  },
+  targetUsername: Env.get('BITBUCKET_TARGET_USERNAME', '')
 }
