@@ -11,6 +11,6 @@ const Route = use('Route')
 
 Route.group(() => {
 
-  Route.resource('pull-requests', 'PullRequestController')
+  Route.resource('/repositories', 'RepositoryController')
 
 }).prefix('api/v1')
