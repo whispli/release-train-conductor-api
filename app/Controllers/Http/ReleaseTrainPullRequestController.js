@@ -26,17 +26,17 @@ class ReleaseTrainPullRequestController {
   async index ({ request, response, view }) {
     try {
       let pullRequests = await this.bitBucketService.getReleaseTrainPullRequests(request.params.repo_slug);
-      response.json({
+      return {
         message: 'Loaded successfully',
         data: pullRequests,
         error: null
-      })
+      }
     } catch (err) {
-      response.json({
+      return {
         message: 'things did not go well...',
         data: [],
         error: err
-      })
+      }
     }
   }
 
@@ -64,17 +64,17 @@ class ReleaseTrainPullRequestController {
     try {
       let branches = await this.bitBucketService.prepareReleaseTrain(request.params.repo_slug)
 
-      response.json({
+      return {
         message: 'Loaded successfully',
         data: branches,
         error: null
-      })
+      }
     } catch (err) {
-      response.json({
+      return {
         message: 'things did not go well...',
         data: [],
         error: err
-      })
+      }
     }
   }
 
@@ -117,17 +117,17 @@ class ReleaseTrainPullRequestController {
     try {
       const data = await this.bitBucketService.releaseReleaseTrain(repoSlug, id)
 
-      response.json({
+      return {
         message: 'Merged successfully',
         data: data,
         error: null
-      })
+      }
     } catch (err) {
-      response.json({
+      return {
         message: 'things did not go well...',
         data: [],
         error: err
-      })
+      }
     }
   }
 

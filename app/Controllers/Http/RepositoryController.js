@@ -26,17 +26,17 @@ class RepositoryController {
   async index ({ request, response, view }) {
     try {
       const repositories = await this.bitBucketService.getRepositories()
-      response.json({
+      return {
         message: 'Loaded successfully',
         data: repositories,
         error: null
-      })
+      }
     } catch (err) {
-      response.json({
+      return {
         message: 'things did not go well...',
         data: [],
         error: err
-      })
+      }
     }
   }
 
