@@ -11,8 +11,14 @@ const Route = use('Route')
 
 Route.group(() => {
 
-  Route.resource('/repositories', 'RepositoryController')
+  Route.resource(
+    '/repositories',
+    'RepositoryController'
+  ).apiOnly()
 
-  Route.resource('/repositories/:repo_slug/release-train-pull-requests', 'ReleaseTrainPullRequestController')
+  Route.resource(
+    '/repositories/:repo_slug/release-train-pull-requests',
+    'ReleaseTrainPullRequestController'
+  ).apiOnly()
 
 }).prefix('api/v1')
