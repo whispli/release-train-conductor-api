@@ -47,7 +47,7 @@ class BitBucketService {
 
   async prepareReleaseTrain(repoSlug) {
     const productionBranch = Config.get('bitbucket.productionBranchPrefix')
-    const releaseBranchNames = await this.getReleaseBranches(repoSlug)
+    const releaseBranchNames = await this._getReleaseBranches(repoSlug)
 
     if (releaseBranchNames.length === 0) {
       throw new Error('Unable to find the release branch.')
@@ -84,7 +84,7 @@ class BitBucketService {
     await this._mergePullRequest(repoSlug, pullRequestId)
   }
 
-  async getReleaseBranches(repoSlug) {
+  async _getReleaseBranches(repoSlug) {
     const releaseBranchPrefix = Config.get('bitbucket.releaseBranchPrefix')
     const query = `name ~ "${releaseBranchPrefix}"`
 
