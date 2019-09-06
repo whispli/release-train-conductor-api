@@ -29,12 +29,12 @@ class RepositoryController {
       response.json({
         message: 'Loaded successfully',
         data: repositories,
-        error: {}
+        error: null
       })
     } catch (err) {
       response.json({
         message: 'things did not go well...',
-        data: {},
+        data: [],
         error: err
       })
     }

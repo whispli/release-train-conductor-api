@@ -16,7 +16,13 @@ class BitBucketService {
       role: 'contributor'
     }
 
-    return this.bitBucketSDK.repositories.list(params)
+    const data = await this.bitBucketSDK.repositories.list(params)
+
+    if (data.data.size === 0) {
+      return [];
+    }
+
+    return data.data.values
   }
 }
 
