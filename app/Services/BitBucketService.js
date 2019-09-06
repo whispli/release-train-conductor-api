@@ -27,12 +27,11 @@ class BitBucketService {
 
   async getReleaseTrainPullRequests(repoSlug) {
     const productionBranchPrefix = Config.get('bitbucket.productionBranchPrefix');
-    const query = `destination.branch.name = "${productionBranchPrefix}"`
+    const query = `destination.branch.name = "${productionBranchPrefix}" AND state = "OPEN"`
 
     let params = {
       username: this.targetUsername,
       pagelen: 50,
-      state: 'OPEN',
       repo_slug: repoSlug,
       q: query
     }
@@ -44,6 +43,16 @@ class BitBucketService {
     }
 
     return data.data.values
+  }
+
+  async mergePullRequest(repoSlug, pullRequestId) {
+    let params = {
+      pull_request_id: pullRequestId,
+      repo_slug: repoSlug,
+      username: this.targetUsername,
+    }
+
+    await this.bitBucketSDK.pullrequests.merge(params)
   }
 }
 
