@@ -26,7 +26,7 @@ class BitBucketService {
   }
 
   async getReleaseTrainPullRequests(repoSlug) {
-    const productionBranchPrefix = Config.get('bitbucket.productionBranchPrefix');
+    const productionBranchPrefix = Config.get('bitbucket.productionBranchPrefix')
     const query = `destination.branch.name = "${productionBranchPrefix}" AND state = "OPEN"`
 
     let params = {
@@ -101,7 +101,7 @@ class BitBucketService {
     return branches.map(branch => branch.name)
   }
 
-  async mergePullRequest(repoSlug, pullRequestId) {
+  async _mergePullRequest(repoSlug, pullRequestId) {
     let params = {
       pull_request_id: pullRequestId,
       repo_slug: repoSlug,
