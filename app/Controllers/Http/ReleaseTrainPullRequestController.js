@@ -96,6 +96,16 @@ class ReleaseTrainPullRequestController {
    * @param {Response} ctx.response
    */
   async update ({ params, request, response }) {
+    const id = params.id
+    const repoSlug = params.repo_slug
+
+    await this.bitBucketService.mergePullRequest(repoSlug, id)
+
+    response.json({
+      message: 'Merged successfully',
+      data: [],
+      error: null
+    });
   }
 
   /**
