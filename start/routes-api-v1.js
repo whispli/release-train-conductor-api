@@ -13,4 +13,6 @@ Route.group(() => {
 
   Route.resource('/repositories', 'RepositoryController')
 
+  Route.resource('/repositories/:repo_slug/release-train-pull-requests', 'ReleaseTrainPullRequestController')
+
 }).prefix('api/v1')

@@ -4,13 +4,19 @@
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 /** @typedef {import('@adonisjs/framework/src/View')} View */
 
+const BitBucketService = use('App/Services/BitBucketService')
+
 /**
- * Resourceful controller for interacting with pullrequests
+ * Resourceful controller for interacting with releasetrainpullrequests
  */
-class PullRequestController {
+class ReleaseTrainPullRequestController {
+  constructor() {
+    this.bitBucketService = new BitBucketService
+  }
+
   /**
-   * Show a list of all pullrequests.
-   * GET pullrequests
+   * Show a list of all releasetrainpullrequests.
+   * GET releasetrainpullrequests
    *
    * @param {object} ctx
    * @param {Request} ctx.request
@@ -18,12 +24,25 @@ class PullRequestController {
    * @param {View} ctx.view
    */
   async index ({ request, response, view }) {
-    return ['TODO: Implement.'];
+    try {
+      let pullRequests = await this.bitBucketService.getReleaseTrainPullRequests(request.params.repo_slug);
+      response.json({
+        message: 'Loaded successfully',
+        data: pullRequests,
+        error: null
+      })
+    } catch (err) {
+      response.json({
+        message: 'things did not go well...',
+        data: [],
+        error: err
+      })
+    }
   }
 
   /**
-   * Render a form to be used for creating a new pullrequest.
-   * GET pullrequests/create
+   * Render a form to be used for creating a new releasetrainpullrequest.
+   * GET releasetrainpullrequests/create
    *
    * @param {object} ctx
    * @param {Request} ctx.request
@@ -34,8 +53,8 @@ class PullRequestController {
   }
 
   /**
-   * Create/save a new pullrequest.
-   * POST pullrequests
+   * Create/save a new releasetrainpullrequest.
+   * POST releasetrainpullrequests
    *
    * @param {object} ctx
    * @param {Request} ctx.request
@@ -45,8 +64,8 @@ class PullRequestController {
   }
 
   /**
-   * Display a single pullrequest.
-   * GET pullrequests/:id
+   * Display a single releasetrainpullrequest.
+   * GET releasetrainpullrequests/:id
    *
    * @param {object} ctx
    * @param {Request} ctx.request
@@ -57,8 +76,8 @@ class PullRequestController {
   }
 
   /**
-   * Render a form to update an existing pullrequest.
-   * GET pullrequests/:id/edit
+   * Render a form to update an existing releasetrainpullrequest.
+   * GET releasetrainpullrequests/:id/edit
    *
    * @param {object} ctx
    * @param {Request} ctx.request
@@ -69,8 +88,8 @@ class PullRequestController {
   }
 
   /**
-   * Update pullrequest details.
-   * PUT or PATCH pullrequests/:id
+   * Update releasetrainpullrequest details.
+   * PUT or PATCH releasetrainpullrequests/:id
    *
    * @param {object} ctx
    * @param {Request} ctx.request
@@ -80,8 +99,8 @@ class PullRequestController {
   }
 
   /**
-   * Delete a pullrequest with id.
-   * DELETE pullrequests/:id
+   * Delete a releasetrainpullrequest with id.
+   * DELETE releasetrainpullrequests/:id
    *
    * @param {object} ctx
    * @param {Request} ctx.request
@@ -91,4 +110,4 @@ class PullRequestController {
   }
 }
 
-module.exports = PullRequestController
+module.exports = ReleaseTrainPullRequestController

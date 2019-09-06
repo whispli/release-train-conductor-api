@@ -24,6 +24,27 @@ class BitBucketService {
 
     return data.data.values
   }
+
+  async getReleaseTrainPullRequests(repoSlug) {
+    const productionBranchPrefix = Config.get('bitbucket.productionBranchPrefix');
+    const query = `destination.branch.name = "${productionBranchPrefix}"`
+
+    let params = {
+      username: this.targetUsername,
+      pagelen: 50,
+      state: 'OPEN',
+      repo_slug: repoSlug,
+      q: query
+    }
+
+    const data = await this.bitBucketSDK.pullrequests.list(params)
+
+    if (data.data.size === 0) {
+      return null;
+    }
+
+    return data.data.values
+  }
 }
 
 module.exports = BitBucketService
