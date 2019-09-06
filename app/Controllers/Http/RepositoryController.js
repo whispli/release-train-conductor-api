@@ -32,6 +32,7 @@ class RepositoryController {
         error: null
       }
     } catch (err) {
+      response.status(err.code)
       return {
         message: 'things did not go well...',
         data: [],

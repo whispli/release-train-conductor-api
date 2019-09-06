@@ -32,6 +32,7 @@ class ReleaseTrainPullRequestController {
         error: null
       }
     } catch (err) {
+      response.status(err.code)
       return {
         message: 'things did not go well...',
         data: [],
@@ -70,6 +71,7 @@ class ReleaseTrainPullRequestController {
         error: null
       }
     } catch (err) {
+      response.status(err.code)
       return {
         message: 'things did not go well...',
         data: [],
@@ -123,6 +125,7 @@ class ReleaseTrainPullRequestController {
         error: null
       }
     } catch (err) {
+      response.status(err.code)
       return {
         message: 'things did not go well...',
         data: [],
