@@ -114,13 +114,21 @@ class ReleaseTrainPullRequestController {
     const id = params.id
     const repoSlug = params.repo_slug
 
-    const data = await this.bitBucketService.releaseReleaseTrain(repoSlug, id)
+    try {
+      const data = await this.bitBucketService.releaseReleaseTrain(repoSlug, id)
 
-    response.json({
-      message: 'Merged successfully',
-      data: data,
-      error: null
-    });
+      response.json({
+        message: 'Merged successfully',
+        data: data,
+        error: null
+      })
+    } catch (err) {
+      response.json({
+        message: 'things did not go well...',
+        data: [],
+        error: err
+      })
+    }
   }
 
   /**
