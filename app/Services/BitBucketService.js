@@ -81,7 +81,7 @@ class BitBucketService {
   }
 
   async releaseReleaseTrain(repoSlug, pullRequestId) {
-    await this._mergePullRequest(repoSlug, pullRequestId)
+    return await this._mergePullRequest(repoSlug, pullRequestId)
   }
 
   async _getReleaseBranches(repoSlug) {
@@ -108,7 +108,7 @@ class BitBucketService {
       username: this.targetUsername,
     }
 
-    await this.bitBucketSDK.pullrequests.merge(params)
+    return await this.bitBucketSDK.pullrequests.merge(params)
   }
 }
 
