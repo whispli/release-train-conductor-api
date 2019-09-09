@@ -28,7 +28,9 @@
     "@adonisjs/shield": "^1.0.8",
     "bitbucket": "^1.15.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "@adonisjs/cli": "^4.0.12"
+  },
   "autoload": {
     "App": "./app"
   }
