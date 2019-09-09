@@ -1,31 +1,12 @@
-# Adonis fullstack application
+# Release Train Conductor
 
-This is the fullstack boilerplate for AdonisJs, it comes pre-configured with.
+This is a spike to assess the developer experience attained when working with the Adonis JS Framework.
 
-1. Bodyparser
-2. Session
-3. Authentication
-4. Web security middleware
-5. CORS
-6. Edge template engine
-7. Lucid ORM
-8. Migrations and seeds
-
-## Setup
-
-Use the adonis command to install the blueprint
+# Setup
 
 ```bash
-adonis new yardstick
-```
-
-or manually clone the repo and then run `npm install`.
-
-
-### Migrations
-
-Run the following command to run startup migrations.
-
-```js
-adonis migration:run
+yarn install
+cp .env.exmaple .env
+./node_modules/.bin/adonis key:generate
+./node_modules/.bin/adonis serve --dev
 ```
