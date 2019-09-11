@@ -21,4 +21,9 @@ Route.group(() => {
     'ReleaseTrainPullRequestController'
   ).apiOnly()
 
+  Route.resource(
+    '/repositories/:repo_slug/release-plane-pull-requests',
+    'ReleasePlanePullRequestController'
+  ).apiOnly()
+
 }).prefix('api/v1')

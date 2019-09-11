@@ -84,9 +84,47 @@ class BitBucketService {
     return await this._mergePullRequest(repoSlug, pullRequestId)
   }
 
+  async getReleasePlanePullRequests(repoSlug) {
+    const productionBranch = Config.get('bitbucket.productionBranch')
+    const productionBranchPrefix = Config.get('bitbucket.productionBranchPrefix')
+    const query = `source.branch.name ~ "${productionBranch}" AND destination.branch.name ~ "${productionBranchPrefix}" AND state = "OPEN"`
+
+    let params = {
+      username: this.targetUsername,
+      pagelen: 50,
+      repo_slug: repoSlug,
+      q: query
+    }
+
+    const data = await this.bitBucketSDK.pullrequests.list(params)
+
+    if (data.data.size === 0) {
+      return null;
+    }
+
+    return data.data.values
+  }
+
   async _getReleaseBranches(repoSlug) {
     const releaseBranchPrefix = Config.get('bitbucket.releaseBranchPrefix')
     const query = `name ~ "${releaseBranchPrefix}"`
+
+    let params = {
+      username: this.targetUsername,
+      pagelen: 50,
+      repo_slug: repoSlug,
+      q: query
+    }
+
+    const data = await this.bitBucketSDK.repositories.listBranches(params)
+    const branches = data.data.values
+
+    return branches.map(branch => branch.name)
+  }
+
+  async _getProductionBranches(repoSlug) {
+    const productionBranchPrefix = Config.get('bitbucket.productionBranchPrefix')
+    const query = `name ~ "${productionBranchPrefix}"`
 
     let params = {
       username: this.targetUsername,
