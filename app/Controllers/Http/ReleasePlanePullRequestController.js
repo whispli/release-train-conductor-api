@@ -114,6 +114,25 @@ class ReleasePlanePullRequestController {
    * @param {Response} ctx.response
    */
   async update ({ params, request, response }) {
+    const id = params.id
+    const repoSlug = params.repo_slug
+
+    try {
+      const data = await this.bitBucketService.releaseReleasePlane(repoSlug, id)
+
+      return {
+        message: 'Merged successfully',
+        data: data,
+        error: null
+      }
+    } catch (err) {
+      response.status(err.code)
+      return {
+        message: 'things did not go well...',
+        data: [],
+        error: err
+      }
+    }
   }
 
   /**

@@ -141,6 +141,10 @@ class BitBucketService {
     return await Promise.all(promises)
   }
 
+  async releaseReleasePlane(repoSlug, pullRequestId) {
+    return await this._mergePullRequest(repoSlug, pullRequestId)
+  }
+
   async _getReleaseBranches(repoSlug) {
     const releaseBranchPrefix = Config.get('bitbucket.releaseBranchPrefix')
     const query = `name ~ "${releaseBranchPrefix}"`
