@@ -27,4 +27,7 @@ module.exports = {
   releaseBranchPrefix: Env.get('RELEASE_BRANCH_PREFIX','release-'),
   productionBranch: Env.get('PRODUCTION_BRANCH', 'master'),
   productionBranchPrefix: Env.get('PRODUCTION_BRANCH_PREFIX','master-'),
+
+  // Todo: Remove this environment variable and give the app state using a DB
+  targetRepositories: Env.get('BITBUCKET_TARGET_REPOSITORIES_CSV', ''),
 }

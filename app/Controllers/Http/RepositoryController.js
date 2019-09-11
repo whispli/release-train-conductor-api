@@ -5,6 +5,7 @@
 /** @typedef {import('@adonisjs/framework/src/View')} View */
 
 const BitBucketService = use('App/Services/BitBucketService')
+const Config = use('Adonis/Src/Config')
 
 /**
  * Resourceful controller for interacting with repositories
@@ -25,7 +26,19 @@ class RepositoryController {
    */
   async index ({ request, response, view }) {
     try {
-      const repositories = await this.bitBucketService.getRepositories()
+      let repositories = await this.bitBucketService.getRepositories()
+
+      let targetRepositoriesCSV = Config.get('bitbucket.targetRepositories')
+      let targetRepositories = []
+      if (targetRepositoriesCSV !== '') {
+        targetRepositories = targetRepositoriesCSV.split(',')
+      }
+      if ( targetRepositories.length > 0 ) {
+        repositories = repositories.filter((repository) => {
+          return targetRepositories.includes(repository.slug)
+        })
+      }
+
       return {
         message: 'Loaded successfully',
         data: repositories,
