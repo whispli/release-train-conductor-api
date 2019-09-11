@@ -135,7 +135,8 @@ module.exports = {
     enable: true,
     methods: ['POST', 'PUT', 'DELETE'],
     filterUris: [
-      '/api/v1/repositories/:repo_slug/release-train-pull-requests'
+      '/api/v1/repositories/:repo_slug/release-train-pull-requests',
+      '/api/v1/repositories/:repo_slug/release-plane-pull-requests'
     ],
     cookieOptions: {
       httpOnly: false,
