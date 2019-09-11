@@ -105,6 +105,42 @@ class BitBucketService {
     return data.data.values
   }
 
+  async prepareReleasePlane(repoSlug) {
+    const productionBranch = Config.get('bitbucket.productionBranch')
+    const productionBranchNames = await this._getProductionBranches(repoSlug)
+
+    if (productionBranchNames.length === 0) {
+      throw new Error('Unable to find production branches.')
+    }
+
+    let currentDateString = new Date().toJSON().slice(0, 10)
+
+    let params = {
+      _body: {
+        title: `Release Plane - ${currentDateString}`,
+        source:  {
+          branch: {
+            name: `${productionBranch}`
+          }
+        }
+      },
+      repo_slug: repoSlug,
+      username: this.targetUsername,
+    };
+
+    let promises = productionBranchNames.map( (productionBranchName) => {
+      params._body.destination = {
+        branch: {
+          name: `${productionBranchName}`
+        }
+      }
+
+      return this.bitBucketSDK.repositories.createPullRequest(params)
+    })
+
+    return await Promise.all(promises)
+  }
+
   async _getReleaseBranches(repoSlug) {
     const releaseBranchPrefix = Config.get('bitbucket.releaseBranchPrefix')
     const query = `name ~ "${releaseBranchPrefix}"`

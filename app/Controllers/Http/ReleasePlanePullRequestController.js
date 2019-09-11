@@ -63,6 +63,22 @@ class ReleasePlanePullRequestController {
    * @param {Response} ctx.response
    */
   async store ({ request, response }) {
+    try {
+      let branches = await this.bitBucketService.prepareReleasePlane(request.params.repo_slug)
+
+      return {
+        message: 'Loaded successfully',
+        data: branches,
+        error: null
+      }
+    } catch (err) {
+      response.status(err.code)
+      return {
+        message: 'things did not go well...',
+        data: [],
+        error: err
+      }
+    }
   }
 
   /**
