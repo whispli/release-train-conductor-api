@@ -26,8 +26,8 @@ class BitBucketService {
   }
 
   async getReleaseTrainPullRequests(repoSlug) {
-    const productionBranchPrefix = Config.get('bitbucket.productionBranchPrefix')
-    const query = `destination.branch.name = "${productionBranchPrefix}" AND state = "OPEN"`
+    const productionBranch = Config.get('bitbucket.productionBranch')
+    const query = `destination.branch.name = "${productionBranch}" AND state = "OPEN"`
 
     let params = {
       username: this.targetUsername,
@@ -46,7 +46,7 @@ class BitBucketService {
   }
 
   async prepareReleaseTrain(repoSlug) {
-    const productionBranch = Config.get('bitbucket.productionBranchPrefix')
+    const productionBranch = Config.get('bitbucket.productionBranch')
     const releaseBranchNames = await this._getReleaseBranches(repoSlug)
 
     if (releaseBranchNames.length === 0) {
