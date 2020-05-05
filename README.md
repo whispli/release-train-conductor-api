@@ -6,7 +6,7 @@ This is a spike to assess the developer experience attained when working with th
 
 ```bash
 yarn install
-cp .env.exmaple .env
+cp .env.example .env
 ./node_modules/.bin/adonis key:generate
 ./node_modules/.bin/adonis serve --dev
 ```
