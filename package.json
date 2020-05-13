@@ -1,21 +1,17 @@
 {
-  "name": "adonis-fullstack-app",
-  "version": "4.1.0",
+  "name": "whispli-release-train-conductor-api",
+  "version": "1.0.0",
   "adonis-version": "4.1.0",
-  "description": "The fullstack application boilerplate for Adonisjs",
+  "description": "One button to deploy them all",
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
     "test": "node ace test"
   },
-  "keywords": [
-    "adonisjs",
-    "adonis-app"
-  ],
   "engines": {
-    "node": "<=8.0.0"
+    "node": ">=8.0.0"
   },
-  "author": "",
+  "author": "Whispli Developers <developers@whispli.com>",
   "license": "UNLICENSED",
   "private": true,
   "dependencies": {
