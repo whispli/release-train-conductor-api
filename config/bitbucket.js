@@ -24,7 +24,7 @@ module.exports = {
     }
   },
   targetUsername: Env.get('BITBUCKET_TARGET_USERNAME', ''),
-  releaseBranchPrefix: Env.get('RELEASE_BRANCH_PREFIX','release-'),
+  releaseBranch: Env.get('RELEASE_BRANCH','release'),
   productionBranch: Env.get('PRODUCTION_BRANCH', 'master'),
   productionBranchPrefix: Env.get('PRODUCTION_BRANCH_PREFIX','master-'),
 
