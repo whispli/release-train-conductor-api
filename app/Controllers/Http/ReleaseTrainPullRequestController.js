@@ -71,7 +71,6 @@ class ReleaseTrainPullRequestController {
         error: null
       }
     } catch (err) {
-      console.log(err)
       response.status(err.code)
       return {
         message: 'things did not go well...',
