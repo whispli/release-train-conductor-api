@@ -146,8 +146,8 @@ class BitBucketService {
   }
 
   async _getReleaseBranches(repoSlug) {
-    const releaseBranchPrefix = Config.get('bitbucket.releaseBranchPrefix')
-    const query = `name ~ "${releaseBranchPrefix}"`
+    const releaseBranch = Config.get('bitbucket.releaseBranch')
+    const query = `name = "${releaseBranch}"`
 
     let params = {
       username: this.targetUsername,
